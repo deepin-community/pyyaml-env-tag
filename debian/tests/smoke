@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e -u
+cp -a test_yaml_env_tag.py "${AUTOPKGTEST_TMP}"
+
+for py3vers in $(py3versions -s); do
+    echo
+    echo "***************************"
+    echo "*** Testing with ${py3vers}"
+    echo "***************************"
+    echo
+    cd ${AUTOPKGTEST_TMP} && \
+        echo "Content of current working folder:\n" && \
+        ls -la && \
+        echo "\nRunning tests...\n" && \
+        ${py3vers} test_yaml_env_tag.py
+done
+
+echo
+
+exit 0
